@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Loan;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -11,8 +12,12 @@ class LoanController extends Controller
         return view('loan.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->isMethod('POST')) {
+            $data = $request->input();
+            dd(Loan::create($data));
+        }
         return view('loan.create');
     }
 

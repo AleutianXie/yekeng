@@ -24,11 +24,12 @@ class CreateLoan extends Migration
             $table->unsignedDecimal('amount')->comment('借款金额');
             $table->string('agreement')->comment('借款合同');
             $table->string('receipt')->comment('票据');
-            $table->string('comment')->comment('备注');
+            $table->string('comment')->nullable()->comment('备注');
             $table->unsignedTinyInteger('status')->default(0)->comment('状态：默认(0),还款中(1),结清(2)');
             $table->unsignedInteger('creater')->comment('创建人');
             $table->foreign('creater')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('repayments', function (Blueprint $table) {
@@ -38,10 +39,11 @@ class CreateLoan extends Migration
             $table->string('month')->comment('应还款月份');
             $table->decimal('amount')->comment('还款金额');
             $table->string('receipt')->comment('票据');
-            $table->string('comment')->comment('备注');
+            $table->string('comment')->nullable()->comment('备注');
             $table->unsignedInteger('creater')->comment('创建人');
             $table->foreign('creater')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
