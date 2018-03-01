@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Interest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
@@ -45,7 +46,6 @@ class Loan extends Model
                 throw new \Exception('Invalid Parameter!');
             }
 
-            $user_id = Auth::id();
             $attributes = [];
             $attributes['date']         = $date;
             $attributes['name']         = $name;
@@ -60,9 +60,42 @@ class Loan extends Model
                 $attributes['comment']  = $comment;
             }
             $attributes['status']       = 1;
-            $attributes['creater']      = $user_id;
+            $attributes['creater']      = Auth::id();
 
             return static::query()->create($attributes);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function interests()
+    {
+        return $this->hasMany(Interest::class);
+    }
+
+    public function repay(array $params = [])
+    {
+        try {
+            $month        = (string) Arr::get($params, 'month');
+            $amount       = (string) Arr::get($params, 'amount');
+            $receipt      = (string) Arr::get($params, 'receipt');
+            $comment      = (string) Arr::get($params, 'comment');
+
+            if (empty($month) ||
+            empty($amount) ||
+            empty($receipt)) {
+                throw new \Exception('Invalid Parameter!');
+            }
+
+            $interest = new Interest();
+            $interest->month        = $month;
+            $interest->amount       = $amount;
+            $interest->receipt      = $receipt;
+            if (!empty($comment)) {
+                $interest->comment  = $comment;
+            }
+            $interest->creater      = Auth::id();
+            $this->interests()->save($interest);
         } catch (Exception $e) {
             throw $e;
         }

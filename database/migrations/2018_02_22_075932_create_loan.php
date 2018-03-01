@@ -32,7 +32,7 @@ class CreateLoan extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('repayments', function (Blueprint $table) {
+        Schema::create('interests', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('loan_id')->comment('借款ID');
             $table->foreign('loan_id')->references('id')->on('loans');

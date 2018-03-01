@@ -26,8 +26,12 @@ class LoanController extends Controller
         return view('loan.detail');
     }
 
-    public function repay()
+    public function repay(Request $request, $loan_id)
     {
-        return view('loan.repay');
+        $loan = Loan::findOrFail($loan_id);
+        if ($request->isMethod('POST')) {
+            dd($loan->repay($request->input()));
+        }
+        return view('loan.repay', compact('loan'));
     }
 }

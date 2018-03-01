@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/loan', 'LoanController@index')->name('loan');
 Route::match(['get', 'post'], '/loan/create', 'LoanController@create')->name('loan.create');
 Route::get('/loan/{id}', 'LoanController@detail')->where('id', '[0-9]+')->name('loan.detail');
-Route::get('/loan/{id}/repay', 'LoanController@repay')->where('id', '[0-9]+')->name('loan.repay');
+Route::match(['get', 'post'], '/loan/{id}/repay', 'LoanController@repay')->where('id', '[0-9]+')->name('loan.repay');

@@ -70,7 +70,7 @@
     </div>
   </div>
   <div class="form-group">
-      <label for="cautioner">配偶</label>
+      <label for="cautioner">担保人</label>
       <input type="text" class="form-control" id="cautioner" name="cautioner" placeholder="担保人" value="{{ old('cautioner') }}" required>
       <div class="valid-feedback">
         Looks good!
