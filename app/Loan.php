@@ -95,7 +95,7 @@ class Loan extends Model
                 $interest->comment  = $comment;
             }
             $interest->creater      = Auth::id();
-            $this->interests()->save($interest);
+            return $this->interests()->save($interest);
         } catch (Exception $e) {
             throw $e;
         }
