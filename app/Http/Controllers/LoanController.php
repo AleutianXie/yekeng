@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('loan.index');
+        $filter = $request->input();
+        $model  = new Loan();
+        $model  = $model->query();
+        $this->getModel($model, $filter);
+        $loans  = $model->paginate()->appends($filter);
+        return view('loan.index', compact('loans'));
     }
 
     public function create(Request $request)
@@ -21,9 +26,10 @@ class LoanController extends Controller
         return view('loan.create');
     }
 
-    public function detail()
+    public function detail(Request $request, $id)
     {
-        return view('loan.detail');
+        $loan = Loan::findOrFail($id);
+        return view('loan.detail', compact('loan'));
     }
 
     public function repay(Request $request, $loan_id)
@@ -33,5 +39,11 @@ class LoanController extends Controller
             dd($loan->repay($request->input()));
         }
         return view('loan.repay', compact('loan'));
+    }
+
+
+    private function getModel(&$model, $filter)
+    {
+        //$model->all();
     }
 }
