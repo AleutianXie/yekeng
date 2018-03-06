@@ -11,15 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/loan', 'LoanController@index')->name('loan');
-Route::match(['get', 'post'], '/loan/create', 'LoanController@create')->name('loan.create');
-Route::get('/loan/{id}', 'LoanController@detail')->where('id', '[0-9]+')->name('loan.detail');
-Route::delete('/loan/{id}/delete', 'LoanController@delete')->where('id', '[0-9]+')->name('loan.delete');
-Route::match(['get', 'post'], '/loan/{id}/repay', 'LoanController@repay')->where('id', '[0-9]+')->name('loan.repay');
+/* 首页 */
+Route::get('/', [
+    'middleware' => ['auth'],
+    'uses'       => function () {
+        if (Auth::user()) {
+            return redirect('/loan');
+        }
+    },
+]);
+
+/* 后台管理 */
+Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
+    Route::get('/', 'LoanController@index')->name('loan');
+    Route::match(['get', 'post'], '/create', 'LoanController@create')->name('loan.create');
+    Route::get('/{id}', 'LoanController@detail')->where('id', '[0-9]+')->name('loan.detail');
+    Route::delete('/{id}/delete', 'LoanController@delete')->where('id', '[0-9]+')->name('loan.delete');
+    Route::delete('/{id}/repay/{interest}/delete', 'LoanController@deleteInterest')->where('id', '[0-9]+')->where('interest', '[0-9]+')->name('loan.interest.delete');
+    Route::match(['get', 'post'], '/{id}/repay', 'LoanController@repay')->where('id', '[0-9]+')->name('loan.repay');
+    Route::get('/{id}/interests', 'LoanController@interests')->where('id', '[0-9]+')->name('loan.interest');
+});

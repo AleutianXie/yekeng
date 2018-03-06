@@ -100,4 +100,14 @@ class Loan extends Model
             throw $e;
         }
     }
+
+    public function removeRepay(int $id)
+    {
+        try {
+            $interest = Interest::findOrFail($id);
+            return $interest->delete();
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

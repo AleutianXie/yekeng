@@ -2,124 +2,115 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">新增借款</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-
-<form class="needs-validation" novalidate method="post">
-  {{ csrf_field() }}
-  <div class="form-group">
-    <label for="date">日期</label>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-      </div>
-      <input type="date" class="form-control" id="date" name="date" value="" placeholder="借款日期" aria-describedby="inputGroupPrepend" required>
-      <div class="invalid-feedback">
-        Please choose a username.
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="name">姓名</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="借款人姓名" value="{{ old('name') }}" required>
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-    <div class="invalid-feedback">
-      Please choose a name.
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="id_no">身份证</label>
-    <input type="text" class="form-control" id="id_no" name="id_no" placeholder="借款人身份证号码" value="{{ old('id_no') }}" required>
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-    <div class="invalid-feedback">
-      Please choose a name.
-    </div>
-  </div>
-  <div class="form-group">
-      <label for="spouse">配偶</label>
-      <input type="text" class="form-control" id="spouse" name="spouse" placeholder="借款人配偶姓名" value="{{ old('spouse') }}" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    <div class="invalid-feedback">
-      Please choose a name.
-    </div>
-  </div>
-  <div class="form-group">
-      <label for="spouse_id_no">配偶身份证</label>
-      <input type="text" class="form-control" id="spouse_id_no" name="spouse_id_no" placeholder="借款人配偶身份证号码" value="{{ old('spouse_id_no') }}" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    <div class="invalid-feedback">
-      Please choose a name.
-    </div>
-  </div>
-  <div class="form-group">
-      <label for="cautioner">担保人</label>
-      <input type="text" class="form-control" id="cautioner" name="cautioner" placeholder="担保人" value="{{ old('cautioner') }}" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    <div class="invalid-feedback">
-      <span aria-hidden="true">&times;</span><i class="fa fa-check"></i>Please choose a name.
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="amount">借款金额</label>
-    <div class="input-group">
-      <input type="text" class="form-control" id="amount" name="amount" placeholder="借款金额" aria-describedby="inputGroupPrepend" required>
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-yen" aria-hidden="true"></i></span>
-      </div>
-      <div class="invalid-feedback">
-        Please choose a username.
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="agreement">借款合同</label>
-    <input type="file" class="form-control" id="agreement" name="agreement" required>
-    <div class="invalid-feedback">
-      Please choose a username.
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="receipt">票据</label>
-    <input type="file" class="form-control" id="receipt" name="receipt" required>
-    <div class="invalid-feedback">
-      Please choose a username.
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="comment">备注</label>
-    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-  </div>
-
-  <button class="btn btn-primary" type="submit">提交</button>
-</form>
-
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">新增借款</div>
+        <div class="card-body">
+          <form class="needs-validation" novalidate method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-group">
+              <label for="date">日期</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                 </div>
+                <input type="date" class="form-control" id="date" name="date" value="" placeholder="借款日期" aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                  Please choose a username.
+                </div>
+              </div>
             </div>
+            <div class="form-group">
+              <label for="name">姓名</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="借款人姓名" value="{{ old('name') }}" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please choose a name.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="id_no">身份证</label>
+              <input type="text" class="form-control" id="id_no" name="id_no" placeholder="借款人身份证号码" value="{{ old('id_no') }}" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please choose a name.
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="spouse">配偶</label>
+                <input type="text" class="form-control" id="spouse" name="spouse" placeholder="借款人配偶姓名" value="{{ old('spouse') }}" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              <div class="invalid-feedback">
+                Please choose a name.
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="spouse_id_no">配偶身份证</label>
+                <input type="text" class="form-control" id="spouse_id_no" name="spouse_id_no" placeholder="借款人配偶身份证号码" value="{{ old('spouse_id_no') }}" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              <div class="invalid-feedback">
+                Please choose a name.
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="cautioner">担保人</label>
+                <input type="text" class="form-control" id="cautioner" name="cautioner" placeholder="担保人" value="{{ old('cautioner') }}" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              <div class="invalid-feedback">
+                <span aria-hidden="true">&times;</span><i class="fa fa-check"></i>Please choose a name.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="amount">借款金额</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="amount" name="amount" placeholder="借款金额" aria-describedby="inputGroupPrepend" required>
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-yen" aria-hidden="true"></i></span>
+                </div>
+                <div class="invalid-feedback">
+                  Please choose a username.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="agreement">借款合同</label>
+              <input type="file" class="form-control" id="agreement" name="agreement" required>
+              <div class="invalid-feedback">
+                Please choose a username.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="receipt">票据</label>
+              <input type="file" class="form-control" id="receipt" name="receipt" required>
+              <div class="invalid-feedback">
+                Please choose a username.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="comment">备注</label>
+              <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">提交</button>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 @endsection
 
