@@ -21,7 +21,8 @@ class LoanController extends Controller
     {
         if ($request->isMethod('POST')) {
             $data = $request->input();
-            dd(Loan::create($data));
+            Loan::create($data);
+            return redirect(route('loan'))->with('succeed', '增加成功!');
         }
         return view('loan.create');
     }
@@ -41,9 +42,15 @@ class LoanController extends Controller
         return view('loan.repay', compact('loan'));
     }
 
+    public function delete(Request $request, $id)
+    {
+        $loan = Loan::findOrFail($id);
+        $loan->delete();
+        return redirect(route('loan'))->with('succeed', '删除成功!');
+    }
 
     private function getModel(&$model, $filter)
     {
-        //$model->all();
+        $model->latest();
     }
 }
