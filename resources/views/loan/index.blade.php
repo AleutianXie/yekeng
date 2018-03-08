@@ -118,7 +118,7 @@
 
     $('table tbody tr td').on('click', 'p:not(:last)', function(e) {
       console.log(e);
-      var id = $(this).parents('tr').children('td:first').text();
+      var id = $(this).parent('tr').children('td:first').text();
       $(location).attr('href', '/loan/'+id);
     });
   });

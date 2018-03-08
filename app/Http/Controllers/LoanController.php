@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLoanPost;
 use App\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class LoanController extends Controller
         return view('loan.index', compact('loans'));
     }
 
-    public function create(Request $request)
+    public function create(StoreLoanPost $request)
     {
         if ($request->isMethod('POST')) {
             $data = $request->input();
